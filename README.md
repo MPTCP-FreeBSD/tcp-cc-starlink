@@ -21,11 +21,21 @@ downlink-sequential-logs/
 uplink-sequential-logs/
   <City>/
     <cca>_<City>__FWD_run<N>.json
+
+downlink-competitive-logs/
+  <City>/
+    <cca>_<City>__REV_run<N>.json
+
+uplink-competitive-logs/
+  <City>/
+    <cca>_<City>__FWD_run<N>.json
 ```
 
 - **REV** = downlink (server → client)
 - **FWD** = uplink (client → server)
 - **run1–run10** = 10 repeated iperf3 runs per CCA per location per direction
+- **sequential** = one CCA active at a time (isolated, no contention)
+- **competitive** = multiple CCAs contending for bandwidth simultaneously
 
 ## Data Format
 
@@ -33,5 +43,6 @@ Each `.json` file is raw iperf3 output for a single run, containing per-interval
 
 ## Notes
 
-- Data collected sequentially (one CCA at a time, not run concurrently) unless noted otherwise in a given batch.
+- `downlink-sequential-logs/` and `uplink-sequential-logs/` contain isolated, single-CCA runs.
+- `downlink-competitive-logs/` and `uplink-competitive-logs/` contain runs where multiple CCAs compete for the same link simultaneously.
 - File naming follows the pattern `<cca>_<location>__<direction>_run<number>.json`.
